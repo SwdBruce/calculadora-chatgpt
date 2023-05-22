@@ -5,31 +5,43 @@ import Pantalla from './componentes/Pantalla';
 import BotonClear from './componentes/BotonClear';
 import { useState } from 'react';
 import { evaluate } from 'mathjs';
+import MostrarPasos from './componentes/MostrarPasos';
 
 function App() {
 
   const [input, setInput] = useState('');
+  const [operacion, setOperacion] = useState('');
+  const [resultado, setResultado] = useState('');
+  const [desarrollo, setDesarrollo] = useState('');
 
   const agregarInput = val => {
-    setInput(input + val);
+    let v = input + val
+    setInput(v)
+    setOperacion(v)
   };
 
   const calcularResultado = () => {
     if (input) {
-      setInput(evaluate(input));
+      let r = evaluate(input)
+      setInput(r)
+      setResultado(r)
     } else {
       alert("Por favor ingrese valores para realizar los cálculos.");
     }
-  };
+  }
+
+  const borrarTodo = () => {
+    setInput('')
+    setOperacion('')
+    setResultado('')
+  }
+
+  const mostrarDesarrollo = (desarrollo) => {
+    setDesarrollo(desarrollo)
+  }
 
   return (
     <div className='App'>
-      <div className='freecodecamp-logo-contenedor'>
-        <img 
-          src={freeCodeCampLogo}
-          className='freecodecamp-logo'
-          alt='Logo de freeCodeCamp' />
-      </div>
       <div className='contenedor-calculadora'>
         <Pantalla input={input}/>
         <div className='fila'>
@@ -57,10 +69,17 @@ function App() {
           <Boton manejarClic={agregarInput}>/</Boton>
         </div>
         <div className='fila'>
-          <BotonClear manejarClear={() => setInput('')}>
-            Clear
+          <BotonClear manejarClear={() => borrarTodo()}>
+            Borrar todo
           </BotonClear>
+
+          <MostrarPasos operacion={ operacion } resultado={ resultado } setDesarrollo={ mostrarDesarrollo }></MostrarPasos>
         </div>
+      </div>
+
+      <div className='resultados-chatgpt'>
+        <h3>Desarrollo de la operación:</h3>
+        { desarrollo }
       </div>
     </div>
   );
