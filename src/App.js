@@ -79,7 +79,8 @@ function App() {
 
       <div className='resultados-chatgpt'>
         <h3>Desarrollo de la operación:</h3>
-        { desarrollo }
+        <pre>{ desarrollo }</pre>
+        
       </div>
     </div>
   );
