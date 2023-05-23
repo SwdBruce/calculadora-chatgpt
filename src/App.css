@@ -5,7 +5,7 @@
   font-family: Lato, sans-serif;
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
 }
 
@@ -26,7 +26,7 @@
   width: 400px;
   height: 600px;
   padding: 14px;
-  background-color: #99c9ff;
+  background-color: #404244;
   border-radius: 20px;
   border: 5px solid white;
   margin-left: 60px;
@@ -41,8 +41,8 @@
 }
 
 .resultados-chatgpt {
-  width: 960px;
-  height: 600px;
+  width: auto;
+  /* height: 600px; */
   margin-left: 80px;
   background-color: #fff4d3;
   border-radius: 20px;
@@ -65,4 +65,10 @@
   border: 2px solid white;
   border-radius: 45px;
   cursor: pointer;
+}
+
+
+.historial-item {
+  background-color: #fff4d3;
+  padding: 5px;
 }

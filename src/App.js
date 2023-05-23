@@ -1,9 +1,8 @@
 import './App.css';
-import freeCodeCampLogo from './imagenes/freecodecamp-logo.png';
 import Boton from './componentes/Boton';
 import Pantalla from './componentes/Pantalla';
 import BotonClear from './componentes/BotonClear';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { evaluate } from 'mathjs';
 import MostrarPasos from './componentes/MostrarPasos';
 
@@ -13,6 +12,7 @@ function App() {
   const [operacion, setOperacion] = useState('');
   const [resultado, setResultado] = useState('');
   const [desarrollo, setDesarrollo] = useState('');
+  const [listaResultados, setListaResultados] = useState(false);
 
   const agregarInput = val => {
     let v = input + val
@@ -39,6 +39,38 @@ function App() {
   const mostrarDesarrollo = (desarrollo) => {
     setDesarrollo(desarrollo)
   }
+
+  
+
+  useEffect(() => {
+    
+    listarResultados()
+  }, [])
+
+  const listarResultados = () => {
+    // cominucarse con el api http://localhost:8888/ por get
+    fetch('http://localhost:8888?listar=1')
+    .then(response => response.json())
+    .then(data => {
+      setListaResultados(data)
+      console.log(data);
+    })
+  }
+
+  const guardarResultados = () => {
+    // cominucarse con el api http://localhost:8888/ por post
+    fetch('http://localhost:8888/', {
+      method: 'POST',
+      body: JSON.stringify({usuario: 'admin', resultado: desarrollo})
+    })
+    .then(response => response.json())
+    .then(data => {
+      let message = data.message
+      listarResultados()
+      alert(message)
+    })
+  }
+
 
   return (
     <div className='App'>
@@ -75,6 +107,25 @@ function App() {
 
           <MostrarPasos operacion={ operacion } resultado={ resultado } setDesarrollo={ mostrarDesarrollo }></MostrarPasos>
         </div>
+
+        <br />
+        <br />
+        <button onClick={ guardarResultados }>Guardar Resultados</button>
+
+        <br />
+        <br />
+
+        <div>
+          <h3 style={{'color': 'white'}}>Resultados guardados</h3>
+          <ul>
+            {
+              listaResultados && listaResultados.map((item, index) => {
+                return <li key={ index } className='historial-item'>{ item.resultado }</li>
+              })
+            }
+          </ul>
+        </div>
+
       </div>
 
       <div className='resultados-chatgpt'>

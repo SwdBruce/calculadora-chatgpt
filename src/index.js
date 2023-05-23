@@ -8,6 +8,7 @@ import Login from './componentes/login/Login';
 ReactDOM.render(
   <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/calculadora" element={<App />} />
       </Routes>
