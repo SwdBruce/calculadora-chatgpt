@@ -70,5 +70,20 @@
 
 .historial-item {
   background-color: #fff4d3;
-  padding: 5px;
+  margin-top: 15px;
+}
+
+.boton-guardar {
+  height: 58px;
+  font-size: 1.6em;
+  display: flex;
+  background-color: #ca59e7;
+  margin-top: 8px;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: white;
+  border: 2px solid white;
+  border-radius: 45px;
+  cursor: pointer;
 }

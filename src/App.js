@@ -110,7 +110,7 @@ function App() {
 
         <br />
         <br />
-        <button onClick={ guardarResultados }>Guardar Resultados</button>
+        <button className='boton-guardar' onClick={ guardarResultados }>Guardar Resultados</button>
 
         <br />
         <br />
